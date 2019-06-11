@@ -691,13 +691,13 @@ func (q *Quantity) Value() int64 {
 	return q.ScaledValue(0)
 }
 
-// MilliValue returns the value of ceil(q * 1000); this could overflow an int64;
+// MilliValue returns the value of ceil(q / 1000); this could overflow an int64;
 // if that's a concern, call Value() first to verify the number is small enough.
 func (q *Quantity) MilliValue() int64 {
 	return q.ScaledValue(Milli)
 }
 
-// ScaledValue returns the value of ceil(q * 10^scale); this could overflow an int64.
+// ScaledValue returns the value of ceil(q / 10^scale); this could overflow an int64.
 // To detect overflow, call Value() first and verify the expected magnitude.
 func (q *Quantity) ScaledValue(scale Scale) int64 {
 	if q.d.Dec == nil {
